@@ -8,6 +8,8 @@ import testePratico.miniautorizador.dto.resposta.RespostaDTO;
 import testePratico.miniautorizador.model.Cartao;
 import testePratico.miniautorizador.repository.CartaoRepositoy;
 
+import java.util.Optional;
+
 @Service
 public class CartaoService {
 
@@ -16,15 +18,15 @@ public class CartaoService {
 
     public RespostaDTO cadastrar(CartaoDTO cartaoDTO){
 
-        Cartao cart = this.BuscarCartao(cartaoDTO.getNumeroCartao());
-        if(cart != null){
-            return new RespostaDTO(HttpStatus.UNPROCESSABLE_ENTITY, new CartaoDTO(cart));
+        Optional<Cartao> cart = this.BuscarCartao(cartaoDTO.getNumeroCartao());
+        if(cart.isPresent()){
+            return new RespostaDTO(HttpStatus.UNPROCESSABLE_ENTITY, new CartaoDTO(cart.get()));
         }
         Cartao cartao = cartaoRepositoy.save(new Cartao(cartaoDTO));
         return new RespostaDTO(HttpStatus.CREATED, new CartaoDTO(cartao));
     }
 
-    private Cartao BuscarCartao(String numeroCartao){
+    private Optional<Cartao> BuscarCartao(String numeroCartao){
         return cartaoRepositoy.findByNumeroCartao(numeroCartao);
     }
 }
