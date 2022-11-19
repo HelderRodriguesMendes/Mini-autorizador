@@ -8,9 +8,8 @@ import testePratico.miniautorizador.model.Cartao;
 @NoArgsConstructor
 public class CartaoDTO {
 
-    private String numeroCartao;
-
     private Integer senha;
+    private String numeroCartao;
 
     public CartaoDTO(Cartao cartao){
         this.numeroCartao = cartao.getNumeroCartao();
