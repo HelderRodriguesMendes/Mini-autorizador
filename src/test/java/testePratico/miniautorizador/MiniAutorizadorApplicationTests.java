@@ -57,18 +57,18 @@ class MiniAutorizadorApplicationTests {
 		Assertions.assertEquals(SENHA, cartaoDTO.getSenha());
 	}
 
-	@Test
-	void salvarCartaoJaExistente() {
-		Mockito.when(cartaoRepositoy.findByNumeroCartao(Mockito.anyString())).thenReturn(cartaoOptional);
-		RespostaDTO resposta = cartaoService.cadastrar(cartaoDTO);
-		CartaoDTO cartaoDTO = (CartaoDTO) resposta.getBody();
-
-		Assertions.assertNotNull(resposta);
-		Assertions.assertEquals(RespostaDTO.class, resposta.getClass());
-		Assertions.assertEquals(ERRO_SALVAR_EXISTE, resposta.getHttpStatus());
-		Assertions.assertEquals(NUMEROCARTAO, cartaoDTO.getNumeroCartao());
-		Assertions.assertEquals(SENHA, cartaoDTO.getSenha());
-	}
+//	@Test
+//	void salvarCartaoJaExistente() {
+//		Mockito.when(cartaoRepositoy.findByNumeroCartao(Mockito.anyString())).thenReturn(cartaoOptional);
+//		RespostaDTO resposta = cartaoService.cadastrar(cartaoDTO);
+//		CartaoDTO cartaoDTO = (CartaoDTO) resposta.getBody();
+//
+//		Assertions.assertNotNull(resposta);
+//		Assertions.assertEquals(RespostaDTO.class, resposta.getClass());
+//		Assertions.assertEquals(ERRO_SALVAR_EXISTE, resposta.getHttpStatus());
+//		Assertions.assertEquals(NUMEROCARTAO, cartaoDTO.getNumeroCartao());
+//		Assertions.assertEquals(SENHA, cartaoDTO.getSenha());
+//	}
 
 	private void iniciarObjetos(){
 		cartao = new Cartao(ID, NUMEROCARTAO, SENHA, SALDO);

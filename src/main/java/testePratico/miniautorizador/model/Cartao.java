@@ -18,7 +18,7 @@ public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "varchar(20)")
+    @Column(columnDefinition = "varchar(20)", unique = true)
     private String numeroCartao;
 
     private Integer senha;

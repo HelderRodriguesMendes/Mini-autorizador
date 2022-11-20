@@ -17,11 +17,6 @@ public class CartaoService {
     private CartaoRepositoy cartaoRepositoy;
 
     public RespostaDTO cadastrar(CartaoDTO cartaoDTO){
-
-        Optional<Cartao> cart = this.BuscarCartao(cartaoDTO.getNumeroCartao());
-        if(cart.isPresent()){
-            return new RespostaDTO(HttpStatus.UNPROCESSABLE_ENTITY, new CartaoDTO(cart.get()));
-        }
         Cartao cartao = cartaoRepositoy.save(new Cartao(cartaoDTO));
         return new RespostaDTO(HttpStatus.CREATED, new CartaoDTO(cartao));
     }
@@ -34,7 +29,7 @@ public class CartaoService {
         return new RespostaDTO(HttpStatus.OK, cartaoOptional.get().getSaldo());
     }
 
-    private Optional<Cartao> BuscarCartao(String numeroCartao){
+    public Optional<Cartao> BuscarCartao(String numeroCartao){
         return cartaoRepositoy.findByNumeroCartao(numeroCartao);
     }
 }
