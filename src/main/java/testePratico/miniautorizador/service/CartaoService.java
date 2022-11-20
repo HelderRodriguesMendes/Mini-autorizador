@@ -26,6 +26,14 @@ public class CartaoService {
         return new RespostaDTO(HttpStatus.CREATED, new CartaoDTO(cartao));
     }
 
+    public RespostaDTO buscarSaldo(String numeroCartao){
+        Optional<Cartao> cartaoOptional = this.BuscarCartao(numeroCartao);
+        if(!cartaoOptional.isPresent()){
+            return new RespostaDTO(HttpStatus.NOT_FOUND, null);
+        }
+        return new RespostaDTO(HttpStatus.OK, cartaoOptional.get().getSaldo());
+    }
+
     private Optional<Cartao> BuscarCartao(String numeroCartao){
         return cartaoRepositoy.findByNumeroCartao(numeroCartao);
     }
