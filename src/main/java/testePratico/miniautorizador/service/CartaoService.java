@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import testePratico.miniautorizador.dto.CartaoDTO;
 import testePratico.miniautorizador.dto.resposta.RespostaDTO;
+import testePratico.miniautorizador.exception.RegraNegocioException;
 import testePratico.miniautorizador.model.Cartao;
 import testePratico.miniautorizador.repository.CartaoRepositoy;
 
@@ -22,11 +23,10 @@ public class CartaoService {
     }
 
     public RespostaDTO buscarSaldo(String numeroCartao){
-        Optional<Cartao> cartaoOptional = this.BuscarCartao(numeroCartao);
-        if(!cartaoOptional.isPresent()){
-            return new RespostaDTO(HttpStatus.NOT_FOUND, null);
-        }
-        return new RespostaDTO(HttpStatus.OK, cartaoOptional.get().getSaldo());
+        Cartao cartao = cartaoRepositoy.findByNumeroCartao(numeroCartao).orElseThrow(() -> {
+            return new RegraNegocioException("", new RespostaDTO(HttpStatus.NOT_FOUND, null));
+        });
+        return new RespostaDTO(HttpStatus.OK, cartao.getSaldo());
     }
 
     public Optional<Cartao> BuscarCartao(String numeroCartao){

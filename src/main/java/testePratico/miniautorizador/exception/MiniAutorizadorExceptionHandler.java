@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import testePratico.miniautorizador.dto.CartaoDTO;
-import testePratico.miniautorizador.exception.model.RegraNegocioException;
 import testePratico.miniautorizador.model.Cartao;
 import testePratico.miniautorizador.service.CartaoService;
 
@@ -25,6 +24,11 @@ public class MiniAutorizadorExceptionHandler extends ResponseEntityExceptionHand
     public ResponseEntity<Object> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex, WebRequest request){
         CartaoDTO cartao = obterCartaoExistente(ex.getMessage());
         return handleExceptionInternal(ex, cartao, new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, request);
+    }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<Object> handleRegraNegocioException(RegraNegocioException ex, WebRequest request){
+        return handleExceptionInternal(ex, ex.getRespostaDTO().getBody(), new HttpHeaders(), ex.getRespostaDTO().getHttpStatus(), request);
     }
 
     private CartaoDTO obterCartaoExistente(String mensagemDeErro){
