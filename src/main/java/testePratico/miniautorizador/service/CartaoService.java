@@ -18,8 +18,12 @@ public class CartaoService {
     private CartaoRepositoy cartaoRepositoy;
 
     public RespostaDTO cadastrar(CartaoDTO cartaoDTO){
-        Cartao cartao = cartaoRepositoy.save(new Cartao(cartaoDTO));
-        return new RespostaDTO(HttpStatus.CREATED, new CartaoDTO(cartao));
+        try{
+            Cartao cartao = cartaoRepositoy.save(new Cartao(cartaoDTO));
+            return new RespostaDTO(HttpStatus.CREATED, new CartaoDTO(cartao));
+        }catch (Exception e){
+            throw new RegraNegocioException("", new RespostaDTO(HttpStatus.UNPROCESSABLE_ENTITY, cartaoDTO));
+        }
     }
 
     public RespostaDTO buscarSaldo(String numeroCartao){
