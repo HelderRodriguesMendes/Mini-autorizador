@@ -9,6 +9,7 @@ import testePratico.miniautorizador.exception.RegraNegocioException;
 import testePratico.miniautorizador.model.Cartao;
 import testePratico.miniautorizador.repository.CartaoRepositoy;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -33,7 +34,19 @@ public class CartaoService {
         return new RespostaDTO(HttpStatus.OK, cartao.getSaldo());
     }
 
-    public Optional<Cartao> BuscarCartao(String numeroCartao){
+    public Optional<Cartao> BuscarCartao_NUMERO(String numeroCartao){
         return cartaoRepositoy.findByNumeroCartao(numeroCartao);
+    }
+
+    public Optional<Cartao> BuscarCartao_SENHA(String numeroCartao, Integer senha){
+        return cartaoRepositoy.findByNumeroCartaoAndSenha(numeroCartao, senha);
+    }
+
+    public Optional<Cartao> BuscarCartao_SALDO(String numeroCartao, BigDecimal saldo){
+        return cartaoRepositoy.verificarSaldo(numeroCartao, saldo);
+    }
+
+    public Cartao salvarAlteracaoSaldo(Cartao cartao){
+        return cartaoRepositoy.save(cartao);
     }
 }
