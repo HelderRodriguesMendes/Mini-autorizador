@@ -43,7 +43,7 @@ public class CartaoService {
     }
 
     public Optional<Cartao> BuscarCartao_SALDO(String numeroCartao, BigDecimal saldo){
-        return cartaoRepositoy.verificarSaldo(numeroCartao, saldo);
+        return cartaoRepositoy.findByNumeroCartaoAndSaldoGreaterThanEqual(numeroCartao, saldo);
     }
 
     public Cartao salvarAlteracaoSaldo(Cartao cartao){

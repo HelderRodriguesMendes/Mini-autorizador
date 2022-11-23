@@ -11,4 +11,7 @@ import org.springframework.http.HttpStatus;
 public class RespostaDTO {
     private HttpStatus httpStatus;
     private Object body;
+
+    //DTO generico para padronizar os retornos aos controllers
+    // de forma com que aceite os diferentes tipos de retornos de cada funcionalidade
 }
