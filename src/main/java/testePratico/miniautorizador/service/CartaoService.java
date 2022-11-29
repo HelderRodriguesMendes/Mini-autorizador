@@ -42,8 +42,8 @@ public class CartaoService {
         return cartaoRepositoy.findByNumeroCartaoAndSenha(numeroCartao, senha);
     }
 
-    public Optional<Cartao> BuscarCartao_SALDO(String numeroCartao, BigDecimal saldo){
-        return cartaoRepositoy.findByNumeroCartaoAndSaldoGreaterThanEqual(numeroCartao, saldo);
+    public Optional<Cartao> BuscarCartao_SALDO(String numeroCartao, BigDecimal valor){
+        return cartaoRepositoy.findByNumeroCartaoAndSaldoGreaterThanEqual(numeroCartao, valor);
     }
 
     public Cartao salvarAlteracaoSaldo(Cartao cartao){
