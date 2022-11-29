@@ -17,7 +17,7 @@ cuidados para uma melhor leitura, incluindo a não utilização de if else em se
 Outros detalhes técnicos do projeto são: 
 - A utilização do Design Patterns Strategy, no qual foi um pattern que atendeu bastante as necessidades do projeto, em relação
 a compreensão e manutenção do código, e também por ter favorecido em não utilizar if else no projeto.
-- Testes unitários com Junit (Somente nas funcionalidades de cadastrar um cartão e consultar saldo).
+- Testes unitários com Junit
 - Utilização de tratamento de erros.
 - Testes via Swagger
 
@@ -26,7 +26,6 @@ a compreensão e manutenção do código, e também por ter favorecido em não u
 
 #### Observações
 As funcionalidades que ficaram sem implementar foram:
-- Testes unitários para a funcionalidade de realizações de transações
 - Garantir que 2 transações disparadas ao mesmo tempo não causem problemas relacionados à concorrência
 
 
